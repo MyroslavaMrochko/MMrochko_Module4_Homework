@@ -57,7 +57,10 @@ group by Order_Details.OrderNumber;
 select ProductNumber, RetailPrice * QuantityOnHand as Stock_price from Products;
 
 --14--
-SELECT OrderNumber, ABS(DATEDIFF(day, ShipDate, OrderDate)) as NumberOfDays FROM Orders;
+SELECT Orders.OrderNumber, ABS(DATEDIFF(day, Orders.ShipDate, Orders.OrderDate))+Max(Product_Vendors.DaysToDeliver) as NumberOfDays FROM Orders 
+inner join Order_Details on Orders.OrderNumber=Order_Details.OrderNumber
+inner join Product_Vendors on Product_Vendors.ProductNumber=Order_Details.ProductNumber
+group by Orders.OrderNumber, Orders.ShipDate, Orders.OrderDate;
 
 --1 till 10000--
 WITH CTE1 as (SELECT 1 as Item  union all SELECT Item +1 FROM CTE1 where Item<10000)
