@@ -10,8 +10,6 @@ select EmpFirstName, EmpLastName, EmpPhoneNumber from Employees;
 --3
 --"пропонуємо" розуміється як ті що представлені у таблиці вироби
 select Categories.CategoryDescription from Products inner join Categories on Products.CategoryID=Categories.CategoryID where Products.QuantityOnHand>=1 group by Categories.CategoryDescription;
---всі категорії
-select distinct(Categories.CategoryDescription) from Categories;
 
 --4
 --"перевозимо" розуміється вироби що мають постачальника 
