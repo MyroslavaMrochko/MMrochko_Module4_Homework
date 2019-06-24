@@ -1,24 +1,24 @@
 --1
---"наші клієнти" розуміється як ті що зробили замовлення
+--"РЅР°С€С– РєР»С–С”РЅС‚Рё" СЂРѕР·СѓРјС–С”С‚СЊСЃСЏ СЏРє С‚С– С‰Рѕ Р·СЂРѕР±РёР»Рё Р·Р°РјРѕРІР»РµРЅРЅСЏ
 select distinct(Customers.CustCity) from Customers inner join Orders on Customers.CustomerID=Orders.CustomerID;
---всі клієнти 
+--РІСЃС– РєР»С–С”РЅС‚Рё 
 select distinct(Customers.CustCity) from Customers;
 
 --2--
 select EmpFirstName, EmpLastName, EmpPhoneNumber from Employees;
 
 --3
---"пропонуємо" розуміється як ті що представлені у таблиці вироби
+--"РїСЂРѕРїРѕРЅСѓС”РјРѕ" СЂРѕР·СѓРјС–С”С‚СЊСЃСЏ СЏРє С‚С– С‰Рѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅС– Сѓ С‚Р°Р±Р»РёС†С– РІРёСЂРѕР±Рё
 select distinct(Products.CategoryID), Categories.CategoryDescription from Products inner join Categories on Products.CategoryID=Categories.CategoryID;
---всі категорії
+--РІСЃС– РєР°С‚РµРіРѕСЂС–С—
 select distinct(Categories.CategoryDescription) from Categories;
 
 --4
---"перевозимо" розуміється вироби що мають дату поставки 
+--"ГЇГҐГ°ГҐГўГ®Г§ГЁГ¬Г®" Г°Г®Г§ГіГ¬ВіВєГІГјГ±Гї ГўГЁГ°Г®ГЎГЁ Г№Г® Г¬Г ГѕГІГј Г¤Г ГІГі ГЇГ®Г±ГІГ ГўГЄГЁ 
 select distinct(Products.ProductName), Products.RetailPrice, Products.CategoryID from Orders 
 inner join Order_Details on Orders.OrderNumber=Order_Details.OrderNumber 
 left join Products on Products.ProductNumber=Order_Details.ProductNumber where Orders.ShipDate is not null;
---всі продукти
+--ГўГ±Ві ГЇГ°Г®Г¤ГіГЄГІГЁ
 select ProductName, RetailPrice, CategoryID from Products;
 
 --5--
@@ -31,23 +31,23 @@ select EmpFirstName, EmpLastName, EmpPhoneNumber, EmployeeID  from Employees ord
 select VendName from Vendors;
 
 --8
---"наші клієнти" розуміється як ті що зробили замовлення
+--"Г­Г ГёВі ГЄГ«ВіВєГ­ГІГЁ" Г°Г®Г§ГіГ¬ВіВєГІГјГ±Гї ГїГЄ ГІВі Г№Г® Г§Г°Г®ГЎГЁГ«ГЁ Г§Г Г¬Г®ГўГ«ГҐГ­Г­Гї
 select distinct(Customers.CustState) from Customers inner join Orders on Customers.CustomerID=Orders.CustomerID;
---всі клієнти
+--ГўГ±Ві ГЄГ«ВіВєГ­ГІГЁ
 select distinct(CustState) from Customers;
 
 --9--
---"торгуємо" розуміється як існують замовлення на ці товари
+--"ГІГ®Г°ГЈГіВєГ¬Г®" Г°Г®Г§ГіГ¬ВіВєГІГјГ±Гї ГїГЄ ВіГ±Г­ГіГѕГІГј Г§Г Г¬Г®ГўГ«ГҐГ­Г­Гї Г­Г  Г¶Ві ГІГ®ГўГ Г°ГЁ
 select Products.ProductName, Products.RetailPrice from Products inner join Order_Details on Products.ProductNumber=Order_Details.ProductNumber group by Products.ProductName, Products.RetailPrice; 
---всі продукти
+--ГўГ±Ві ГЇГ°Г®Г¤ГіГЄГІГЁ
 select ProductName, RetailPrice from Products; 
 
 --10--
 select * from Employees;
 
 --11--
---1а частина питання: "наші поставщики" - розуміється як ті що мають під собою вироби (раз вони мають під собою вироби, значить мають наші замовлення)
---2а частина питання: "імена всіх поставщиків, з якими ми працюємо в кожному місті" - розуміється як ті в якому місті знаходяться наші клієнти
+--1Г  Г·Г Г±ГІГЁГ­Г  ГЇГЁГІГ Г­Г­Гї: "Г­Г ГёВі ГЇГ®Г±ГІГ ГўГ№ГЁГЄГЁ" - Г°Г®Г§ГіГ¬ВіВєГІГјГ±Гї ГїГЄ ГІВі Г№Г® Г¬Г ГѕГІГј ГЇВіГ¤ Г±Г®ГЎГ®Гѕ ГўГЁГ°Г®ГЎГЁ (Г°Г Г§ ГўГ®Г­ГЁ Г¬Г ГѕГІГј ГЇВіГ¤ Г±Г®ГЎГ®Гѕ ГўГЁГ°Г®ГЎГЁ, Г§Г­Г Г·ГЁГІГј Г¬Г ГѕГІГј Г­Г ГёВі Г§Г Г¬Г®ГўГ«ГҐГ­Г­Гї)
+--2Г  Г·Г Г±ГІГЁГ­Г  ГЇГЁГІГ Г­Г­Гї: "ВіГ¬ГҐГ­Г  ГўГ±ВіГµ ГЇГ®Г±ГІГ ГўГ№ГЁГЄВіГў, Г§ ГїГЄГЁГ¬ГЁ Г¬ГЁ ГЇГ°Г Г¶ГѕВєГ¬Г® Гў ГЄГ®Г¦Г­Г®Г¬Гі Г¬ВіГ±ГІВі" - Г°Г®Г§ГіГ¬ВіВєГІГјГ±Гї ГїГЄ ГІВі Гў ГїГЄГ®Г¬Гі Г¬ВіГ±ГІВі Г§Г­Г ГµГ®Г¤ГїГІГјГ±Гї Г­Г ГёВі ГЄГ«ВіВєГ­ГІГЁ
 select VendCity, VendName from Vendors inner join Product_Vendors on Vendors.VendorID=Product_Vendors.VendorID 
 inner join Order_Details on Order_Details.ProductNumber=Product_Vendors.ProductNumber
 inner join Orders on Order_Details.OrderNumber=Orders.OrderNumber
