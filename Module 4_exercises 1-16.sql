@@ -39,8 +39,6 @@ select distinct(CustState) from Customers;
 --9--
 --"торгуємо" розуміється як існують замовлення на ці товари
 select Products.ProductName, Products.RetailPrice from Products inner join Order_Details on Products.ProductNumber=Order_Details.ProductNumber group by Products.ProductName, Products.RetailPrice; 
---всі продукти
-select ProductName, RetailPrice from Products; 
 
 --10--
 select * from Employees;
