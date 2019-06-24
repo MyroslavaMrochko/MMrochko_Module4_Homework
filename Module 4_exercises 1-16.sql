@@ -15,9 +15,7 @@ select Categories.CategoryDescription from Products inner join Categories on Pro
 --"перевозимо" розуміється вироби що мають постачальника 
 select distinct(Products.ProductName), Products.RetailPrice, Products.CategoryID from Products 
 inner join Product_Vendors on Product_Vendors.ProductNumber=Products.ProductNumber 
-
---всі продукти
-select ProductName, RetailPrice, CategoryID from Products;
+where Product_Vendors.VendorID is not null;
 
 --5--
 select VendName from Vendors order by VendZipCode;
