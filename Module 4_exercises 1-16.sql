@@ -14,11 +14,11 @@ select distinct(Products.CategoryID), Categories.CategoryDescription from Produc
 select distinct(Categories.CategoryDescription) from Categories;
 
 --4
---"ïåðåâîçèìî" ðîçóì³ºòüñÿ âèðîáè ùî ìàþòü äàòó ïîñòàâêè 
+--"перевозимо" розуміється вироби що мають дату поставки 
 select distinct(Products.ProductName), Products.RetailPrice, Products.CategoryID from Orders 
 inner join Order_Details on Orders.OrderNumber=Order_Details.OrderNumber 
 left join Products on Products.ProductNumber=Order_Details.ProductNumber where Orders.ShipDate is not null;
---âñ³ ïðîäóêòè
+--всі продукти
 select ProductName, RetailPrice, CategoryID from Products;
 
 --5--
@@ -31,24 +31,23 @@ select EmpFirstName, EmpLastName, EmpPhoneNumber, EmployeeID  from Employees ord
 select VendName from Vendors;
 
 --8
---"íàø³ êë³ºíòè" ðîçóì³ºòüñÿ ÿê ò³ ùî çðîáèëè çàìîâëåííÿ
+--"наші клієнти" розуміється як ті що зробили замовлення
 select distinct(Customers.CustState) from Customers inner join Orders on Customers.CustomerID=Orders.CustomerID;
---âñ³ êë³ºíòè
+--всі клієнти
 select distinct(CustState) from Customers;
 
 --9--
---"òîðãóºìî" ðîçóì³ºòüñÿ ÿê ³ñíóþòü çàìîâëåííÿ íà ö³ òîâàðè
+--"торгуємо" розуміється як існують замовлення на ці товари
 select Products.ProductName, Products.RetailPrice from Products inner join Order_Details on Products.ProductNumber=Order_Details.ProductNumber group by Products.ProductName, Products.RetailPrice; 
---âñ³ ïðîäóêòè
+--всі продукти
 select ProductName, RetailPrice from Products; 
 
 --10--
 select * from Employees;
 
 --11--
---1à ÷àñòèíà ïèòàííÿ: "íàø³ ïîñòàâùèêè" - ðîçóì³ºòüñÿ ÿê ò³ ùî ìàþòü ï³ä ñîáîþ âèðîáè (ðàç âîíè ìàþòü ï³ä ñîáîþ âèðîáè, çíà÷èòü ìàþòü íàø³ çàìîâëåííÿ)
---2à ÷àñòèíà ïèòàííÿ: "³ìåíà âñ³õ ïîñòàâùèê³â, ç ÿêèìè ìè ïðàöþºìî â êîæíîìó ì³ñò³" - ðîçóì³ºòüñÿ ÿê ò³ â ÿêîìó ì³ñò³ çíàõîäÿòüñÿ íàø³ êë³ºíòè
-select VendCity, VendName from Vendors inner join Product_Vendors on Vendors.VendorID=Product_Vendors.VendorID 
+--1а частина питання: "наші поставщики" - розуміється як ті що мають під собою вироби (раз вони мають під собою вироби, значить мають наші замовлення)
+--2а частина питання: "імена всіх поставщиків, з якими ми працюємо в кожному місті" - розуміється як ті в якому місті знаходяться наші клієнтиselect VendCity, VendName from Vendors inner join Product_Vendors on Vendors.VendorID=Product_Vendors.VendorID 
 inner join Order_Details on Order_Details.ProductNumber=Product_Vendors.ProductNumber
 inner join Orders on Order_Details.OrderNumber=Orders.OrderNumber
 inner join Customers on Customers.CustomerID=Orders.CustomerID
