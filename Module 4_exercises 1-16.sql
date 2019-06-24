@@ -9,15 +9,15 @@ select EmpFirstName, EmpLastName, EmpPhoneNumber from Employees;
 
 --3
 --"пропонуємо" розуміється як ті що представлені у таблиці вироби
-select distinct(Products.CategoryID), Categories.CategoryDescription from Products inner join Categories on Products.CategoryID=Categories.CategoryID;
+select Categories.CategoryDescription from Products inner join Categories on Products.CategoryID=Categories.CategoryID where Products.QuantityOnHand>=1 group by Categories.CategoryDescription;
 --всі категорії
 select distinct(Categories.CategoryDescription) from Categories;
 
 --4
---"перевозимо" розуміється вироби що мають дату поставки 
-select distinct(Products.ProductName), Products.RetailPrice, Products.CategoryID from Orders 
-inner join Order_Details on Orders.OrderNumber=Order_Details.OrderNumber 
-left join Products on Products.ProductNumber=Order_Details.ProductNumber where Orders.ShipDate is not null;
+--"перевозимо" розуміється вироби що мають постачальника 
+select distinct(Products.ProductName), Products.RetailPrice, Products.CategoryID from Products 
+inner join Product_Vendors on Product_Vendors.ProductNumber=Products.ProductNumber 
+
 --всі продукти
 select ProductName, RetailPrice, CategoryID from Products;
 
